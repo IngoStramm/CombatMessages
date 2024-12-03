@@ -1,0 +1,7 @@
+## Interface: 11505
+## Title: Combat Messages
+## Notes: Sends a random message when the player enters combat.
+## Author: Ingo Stramm
+## Version: 1.0
+## Dependencies: 
+CombatMessages.lua
