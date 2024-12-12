@@ -184,11 +184,42 @@ local function enviar_frase_com_emote()
     SendChatMessage(emote_com_frase, "EMOTE")
 end
 
+-- Função para verificar se o alvo é atacável
+local function verificarAlvoAtacavel()
+    -- Verifica se há um alvo selecionado
+    if UnitExists("target") then
+        -- Verifica se o alvo não está morto e pode ser atacado
+        if not UnitIsDead("target") and UnitCanAttack("player", "target") then
+            -- Verifica se o alvo não está sendo agarrado por outro jogador (tapped)
+            if not UnitIsTapDenied("target") then
+                -- Verifica se o alvo é inimigo
+                if not UnitIsFriend("player", "target") then
+                    return true -- O alvo é atacável
+                else
+                    -- print("O alvo não é inimigo.")
+                    return false
+                end
+            else
+                -- print("O alvo está sendo atacado por outro jogador.")
+                return false
+            end
+        else
+            -- print("O alvo não é atacável (morto ou não pode ser atacado).")
+            return false
+        end
+    else
+        -- print("Nenhum alvo selecionado.")
+        return false
+    end
+end
+
 -- Evento para detectar quando o jogador entra em combate
 local function onEvent(self, event, arg1)
     if event == "PLAYER_REGEN_DISABLED" then
         -- Quando o jogador entra em combate, envia a frase como emote
-        enviar_frase_com_emote()
+        if verificarAlvoAtacavel() then
+            enviar_frase_com_emote()
+        end
     end
 end
 

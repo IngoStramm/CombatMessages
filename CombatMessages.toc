@@ -2,6 +2,6 @@
 ## Title: Combat Messages
 ## Notes: Sends a random message when the player enters combat.
 ## Author: Ingo Stramm
-## Version: 1.0
+## Version: 1.1
 ## Dependencies: 
 CombatMessages.lua
